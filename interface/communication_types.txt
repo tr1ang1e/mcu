@@ -1,0 +1,61 @@
+
+
+		  # +--------------------------------------------+ #
+		  # +      DUPLEX TYPES                          + #
+		  # +--------------------------------------------+ #
+
+  > duplex
+  > semiduplex
+  > simplex
+
+  duplex = simultaneously in both directions
+  +------------------+				+------------------+
+  +     transmitter  +	    >>  	+  reciever        +
+  +        reciever  +	    <<	    +  transmitter     +
+  +------------------+				+------------------+
+
+  semiduplex = in one direction at the time
+  +------------------+				+------------------+
+  +     transmitter  +	>>  or		+  reciever        +
+  +        reciever  +	    or  <<	+  transmitter     +
+  +------------------+				+------------------+
+
+  simplex = only from one point to another
+  +------------------+				+------------------+
+  +     transmitter  +	    >>     	+  reciever        +
+  +               x  +	     	    +  x               +
+  +------------------+				+------------------+
+
+
+
+		  # +--------------------------------------------+ #
+		  # +      INERFACE TYPES                        + #
+		  # +--------------------------------------------+ #
+
+
+  > serial interface
+  > parallel interface
+
+
+  data = 8 bits = 11000001 
+  bits indecies = 76543210
+    0 is LSB (least significant bit)
+    7 is MSB (most significant bit)
+
+
+  serial interface = transmitter sends and reciever gets one bit per time
+  +------------------+                        	     +------------------+
+  +     transmitter  +   >>   1 0 0 0 0 0 1 1   >>   +  reciever        +
+  +------------------+        ^             ^        +------------------+
+   one line and one port     LSB           MSB                      
+
+
+  parallel interface = transmitter sends and reciever gets multiple bits per time
+  +------------------+             +------------------+
+  +     transmitter  +      1      +  reciever        +
+  +                  +      1      +                  +
+  +                  +  >> ... >>  +                  +
+  +                  +      0      +                  +
+  +                  +      1      +                  +
+  +------------------+             +------------------+
+  multiple parallel lines and multiple ports                        

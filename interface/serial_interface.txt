@@ -1,0 +1,41 @@
+
+
+		  # +--------------------------------------------+ #
+		  # +      COMMOM INFORMATION                    + #
+		  # +--------------------------------------------+ #
+
+  Serial aproach is replacement for parallel ones.
+  Current usage:
+    > communication channels (USB cable, Ethernet, ...)
+	> computer buses (e.g. PCI was replaced by PCI Express, common motherboard interface = https://en.wikipedia.org/wiki/PCI_Express)
+
+  Advantages:
+	- channels low cost (only one is needed)
+	- no problems with clock skew (https://en.wikipedia.org/wiki/Clock_skew)
+	- no problems with interconnect density (https://en.wikipedia.org/wiki/Interconnect_(integrated_circuits)
+  Difficulties:
+  	- signal integrity (https://en.wikipedia.org/wiki/Signal_integrity) << improved enough, not a problem
+    - transmission speed is lower then in parallel interfaces << improved enough, not a problem
+	- need serializer and deserializer (SerDes)
+
+  Serial system components:
+    HW (hardware layer) = is INTERFACE
+	SW (software layer) = is PROTOCOL
+
+
+		  # +--------------------------------------------+ #
+		  # +      Serial protocols and interfaces       + #
+		  # +--------------------------------------------+ #
+
+  UART (universal asynchronous reciever-transmitter) = ... serial port = COM-port (windows alias) ... https://en.wikipedia.org/wiki/Serial_port
+  USB () = ... 
+  I2C () = ...
+  SPI () = ...
+	
+
+
+
+
+		  # +--------------------------------------------+ #
+		  # +                                            + #
+		  # +--------------------------------------------+ #

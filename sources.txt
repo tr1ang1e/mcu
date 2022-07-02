@@ -1,0 +1,22 @@
+
+Terms to study:
+  - Flash and EEPROM
+  - GPIO
+  - I2C
+  - SPI
+  - USB
+
+Уроки Arduino и програмирования
+
+	сайт: https://alexgyver.ru
+	видеокурс: https://www.youtube.com/playlist?list=PLgAbBhxTglwmVxDDC5TSYUI91oZ0LZQMw
+
+Работа с COM-port в Linux 
+
+	статья: http://we.easyelectronics.ru/electro-and-pc/rabota-s-som-portom-na-si-v-linux.html
+
+Понимание USB интерфейса и протокола
+
+	вики: https://ru.wikipedia.org/wiki/USB
+	серия специализированный статей: http://we.easyelectronics.ru/blog/electro-and-pc/ (поисковый запрос "Интерфейс USB" в разделе Связь железа с компьютером) 
+	сайт: https://www.usbmadesimple.co.uk
