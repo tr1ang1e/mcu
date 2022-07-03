@@ -5,6 +5,7 @@ Terms to study:
   - I2C
   - SPI
   - USB
+  - GND, U, TX-RX ... ? 
 
 Уроки Arduino и програмирования
 

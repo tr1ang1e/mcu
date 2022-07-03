@@ -18,18 +18,31 @@
     - transmission speed is lower then in parallel interfaces << improved enough, not a problem
 	- need serializer and deserializer (SerDes)
 
-  Serial system components:
+  Serial PORT is a name for any module which purpose is to establish serial communication
+  Serial port components:
     HW (hardware layer) = is INTERFACE
 	SW (software layer) = is PROTOCOL
-
+  
 
 		  # +--------------------------------------------+ #
-		  # +      Serial protocols and interfaces       + #
+		  # +      Serial ports                          + #
 		  # +--------------------------------------------+ #
 
-  UART (universal asynchronous reciever-transmitter) = ... serial port = COM-port (windows alias) ... https://en.wikipedia.org/wiki/Serial_port
+  UART (universal asynchronous reciever-transmitter, https://en.wikipedia.org/wiki/Serial_port, https://habr.com/ru/post/109395/)
+	- the most widespread protocol is RS-232
+	- naming notes:
+	    serial port = abstraction, but is used to indicate UART sometimes (because of RS-232 popularity) 
+		COM port = slang naming of RS-232, but is used as abstraction (because in Windows it indicates any serial devices now) 
+    - might be duplex or semiduplex depending on protocol
+	- minimal necessary elements os scheme:
+		clock
+		TX line, RX line (for both: data register + shift register)
+		GND + E
+
   USB () = ... 
+
   I2C () = ...
+
   SPI () = ...
 	
 
