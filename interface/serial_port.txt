@@ -34,13 +34,23 @@
 	    serial port = abstraction, but is used to indicate UART sometimes (because of RS-232 popularity) 
 		COM port = slang naming of RS-232, but is used as abstraction (because in Windows it indicates any serial devices now) 
     - might be duplex or semiduplex depending on protocol
-	- minimal necessary elements os scheme:
+	- minimal necessary elements of scheme:
 		clock
-		TX line, RX line (for both: data register + shift register)
+		TX line, RX line (for both: data register (store sending data) + shift register (send bit by bit))
 		GND + E
 
-  USB () = ... 
-
+  USB (universal serial bus) = https://ru.wikipedia.org/wiki/USB
+	- differ by
+		protocol versions (..., 2.0, 3.0, ...)
+		connector types (A, ..., B, ..., C)
+	- master-slave model, master always initiates transaction (even if input from slave is required)
+	- connection particularities:
+		power supply by USB connection and power management by master
+		on-fly detection
+		net topology (IP:port logical analogue)
+			address = simultaneously connecting of several slaves (7 bit address = up to 127) to one master
+			endpoint = several endpoints in one connection
+		
   I2C () = ...
 
   SPI () = ...

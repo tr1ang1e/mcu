@@ -1,16 +1,27 @@
 
+Terms:
+
+  - IC [abstract] = integrated circuit (the same as 'microchip') = https://en.wikipedia.org/wiki/Integrated_circuit
+  - MCU [speific] = microcontroller unit = https://en.wikipedia.org/wiki/Microcontroller 
+
 Terms to study:
+
   - Flash and EEPROM
   - GPIO
   - I2C
   - SPI
   - USB
-  - GND, U, TX-RX ... ? 
+  - GND, U, TX-RX ... ?
+  - interrupts
 
 Уроки Arduino и програмирования
 
 	сайт: https://alexgyver.ru
 	видеокурс: https://www.youtube.com/playlist?list=PLgAbBhxTglwmVxDDC5TSYUI91oZ0LZQMw
+
+Русскоязычный сайт Arduino
+
+	https://arduino.ru
 
 Работа с COM-port в Linux 
 
