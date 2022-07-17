@@ -1,0 +1,20 @@
+
+ *--------------------------------------------------------------*
+ *                       ARDUINO IDE                            *
+ *--------------------------------------------------------------*
+
+ QWEST	:  do i need to install smth else in addintion to IDE
+ ANS	:  for Arduino IDE ver. 1.8.19 all additional components (JAVA, programmer driver) are in the same folder as IDE itself
+
+ QWEST	:  where are libraries 
+ ANS	:  for Arduino IDE ver. 1.8.19 all standard libraries and folder for users are in the same foldar as IDE itself
+  
+
+ *--------------------------------------------------------------*
+ *                          ERRORS                              *
+ *--------------------------------------------------------------*
+
+ 
+ ERROR	:  stk500_recv(): programmer is not responding
+ FIX	:  Arduino IDE - Tools - Processor - try '... old bootloader' menu point
+

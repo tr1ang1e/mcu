@@ -10,9 +10,9 @@ Terms to study:
   - GPIO
   - I2C
   - SPI
-  - USB
   - GND, U, TX-RX ... ?
   - interrupts
+  - programmer, bootloader
 
 Уроки Arduino и програмирования
 
@@ -32,3 +32,9 @@ Terms to study:
 	вики: https://ru.wikipedia.org/wiki/USB
 	серия специализированный статей: http://we.easyelectronics.ru/blog/electro-and-pc/ (поисковый запрос "Интерфейс USB" в разделе Связь железа с компьютером) 
 	сайт: https://www.usbmadesimple.co.uk
+
+Драйвера
+
+    анатомия драйвера: https://habr.com/ru/post/282564/
+	написание драйвера под линукс: https://habr.com/ru/post/206148/ 
+	книга по драйверам: "Linux Device Drivers" (см на русском языке на линуксе)

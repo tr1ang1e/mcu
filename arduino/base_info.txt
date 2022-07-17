@@ -1,0 +1,54 @@
+
+	MC = microchip: might be bought and used alone, but 
+	     - requres external power supply + voltage stabilizer     // see I, V 
+		 - requires programmer								
+		 - doesn't have convinient ports
+
+	I = input USB-port:
+		- use as serial port
+		- access to built-in progremmer		// see P
+		- power supply						
+
+    P = built-in programmer
+
+	V = voltage stabilizer
+
+	Ports:
+	   A00..A07 = analogue port  =  continious voltage chart			// range 0..5V						
+	   D02..D13 = digital port   =  discrete voltage levels, 0 or 1     // usually 0V = 0, 5V = 1 but might be vice versa
+		    RX0 = one more digital port									// ...					 
+	        TX1 = one more digital port								    // ...
+
+	   GND = ground (2 pins)
+	   +5V = power supply
+	   UIN = ...
+
+
+
+
+								FRONT												BACK
+
+							   +-----+                                             +-----+
+				   +---------- |  I  | ----------+					   +---------- |  I  | ----------+
+				   |		   +-----+           |				       |		   +-----+           |
+				   |  [ D13 ]           [ D12 ]  |                     |                             |
+				   |  [     ]           [ D11 ]  |                     |    +-----+                  |
+				   |  [     ]           [ D10 ]  |                     |    |     |                  |
+				   |  [     ]           [ D09 ]  |                     |    |  P  |                  |
+				   |  [ A00 ]  +-----+  [ D08 ]  |                     |    |     |                  |
+				   |  [ A01 ]  |  M  |  [ D07 ]  |                     |    +-----+                  |
+				   |  [ A02 ]  |  C  |  [ D06 ]  |                     |                             |
+				   |  [ A03 ]  +-----+  [ D05 ]  |                     |                             |
+				   |  [ A04 ]           [ D04 ]  |                     |                             |
+				   |  [ A05 ]           [ D03 ]  |                     |                             |
+				   |  [ A06 ]           [ D02 ]  |                     |                             |
+				   |  [ A07 ]           [     ]  |                     |                             |
+				   |  [ +5V ]           [     ]  |                     |                             |
+				   |  [     ]           [ GND ]  |                     |                             |
+				   |  [ GND ]           [ RX0 ]  |                     |                             |
+				   |  [ UIN ]           [ TX1 ]  |                     |           +-----+           |
+				   |                             |                     |           |  V  |           |
+				   |  [     ]  [     ]  [     ]  |                     |           +-----+           |
+ 				   |  [     ]  [     ]  [     ]  |                     |                             |
+				   |                             |                     |                             |
+				   +-----------------------------+                     +-----------------------------+
