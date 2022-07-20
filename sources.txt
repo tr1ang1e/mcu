@@ -13,15 +13,17 @@ Terms to study:
   - GND, U, TX-RX ... ?
   - interrupts
   - programmer, bootloader
+  - find Arduino Nano pinout
 
 Уроки Arduino и програмирования
 
 	сайт: https://alexgyver.ru
 	видеокурс: https://www.youtube.com/playlist?list=PLgAbBhxTglwmVxDDC5TSYUI91oZ0LZQMw
 
-Русскоязычный сайт Arduino
+Документация Arduino
 
-	https://arduino.ru
+	официальный сайт (раздел обучения): https://docs.arduino.cc/learn/ 
+	русскоязычный: https://arduino.ru
 
 Работа с COM-port в Linux 
 
