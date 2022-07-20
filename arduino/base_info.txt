@@ -14,14 +14,19 @@
 	V = voltage stabilizer
 
 	Ports:
-	   A00..A07 = analogue port  =  continious voltage chart			// range 0..5V						
-	   D02..D13 = digital port   =  discrete voltage levels, 0 or 1     // usually 0V = 0, 5V = 1 but might be vice versa
-		    RX0 = one more digital port									// ...					 
-	        TX1 = one more digital port								    // ...
+
+	   A00..A07 = analogue port:
+			in  :  continious voltage chart			// range = 0V..5V , graduation interval ~ 0.005V  
+			out :  digital signal					// discrete = 0V or 5V
+			                        
+	   D02..D13 = digital port : discrete voltage levels, 0 or 1     // usually 0V = 0, 5V = 1 but might be vice versa
+		    RX0 = one more digital port								 // ...					 
+	        TX1 = one more digital port								 // ...
 
 	   GND = ground (2 pins)
-	   +5V = power supply
-	   UIN = ...
+	   5V0 = power supply, 5.0V
+	   3V3 = power supply, 3.3V
+	   VIN = voltage stabilizer pin (in = direct current 7V..12V, result = 5.0V)
 
 
 
@@ -32,7 +37,7 @@
 				   +---------- |  I  | ----------+					   +---------- |  I  | ----------+
 				   |		   +-----+           |				       |		   +-----+           |
 				   |  [ D13 ]           [ D12 ]  |                     |                             |
-				   |  [     ]           [ D11 ]  |                     |    +-----+                  |
+				   |  [ 3V3 ]           [ D11 ]  |                     |    +-----+                  |
 				   |  [     ]           [ D10 ]  |                     |    |     |                  |
 				   |  [     ]           [ D09 ]  |                     |    |  P  |                  |
 				   |  [ A00 ]  +-----+  [ D08 ]  |                     |    |     |                  |
@@ -43,7 +48,7 @@
 				   |  [ A05 ]           [ D03 ]  |                     |                             |
 				   |  [ A06 ]           [ D02 ]  |                     |                             |
 				   |  [ A07 ]           [     ]  |                     |                             |
-				   |  [ +5V ]           [     ]  |                     |                             |
+				   |  [ 5V0 ]           [     ]  |                     |                             |
 				   |  [     ]           [ GND ]  |                     |                             |
 				   |  [ GND ]           [ RX0 ]  |                     |                             |
 				   |  [ UIN ]           [ TX1 ]  |                     |           +-----+           |

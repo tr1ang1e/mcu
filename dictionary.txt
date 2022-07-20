@@ -1,0 +1,3 @@
+	
+	DC = direct current
+	AC = alternating current
