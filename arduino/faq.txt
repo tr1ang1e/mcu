@@ -8,6 +8,7 @@
  ANS    :  Arduino official: https://www.arduino.cc/
 		   Arduino IDE ver. 2 tutorial: https://docs.arduino.cc/software/ide-v2
 		   Work with Arduino registers: https://alexgyver.ru/lessons/registers/
+		   How to connect RPI and Arduino: https://www.monocilindro.com/2017/02/19/how-to-connect-arduino-and-raspberry-pi-using-usb-and-c/
 
  QWEST	:  do i need to install smth else in addintion to IDE
  ANS	:  for Arduino IDE ver. 1.8.19 all additional components (JAVA, programmer driver) are in the same folder as IDE itself
