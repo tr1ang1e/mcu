@@ -19,6 +19,7 @@ Terms to study:
 
 	сайт: https://alexgyver.ru
 	видеокурс: https://www.youtube.com/playlist?list=PLgAbBhxTglwmVxDDC5TSYUI91oZ0LZQMw
+	статьи и книги: https://vk.com/rasduino
 
 Документация Arduino
 

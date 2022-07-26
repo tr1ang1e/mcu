@@ -16,12 +16,17 @@
 	Ports:
 
 	   A00..A07 = analogue port:
-			in  :  continious voltage chart			// range = 0V..5V , graduation interval ~ 0.005V  
-			out :  digital signal					// discrete = 0V or 5V
-			                        
-	   D02..D13 = digital port : discrete voltage levels, 0 or 1     // usually 0V = 0, 5V = 1 but might be vice versa
-		    RX0 = one more digital port								 // ...					 
-	        TX1 = one more digital port								 // ...
+			00..07  =  only in    :  continious voltage chart  -  range = 0V..5V  -  graduation interval ~ 0.005V 
+			00..05  =  in or out  :  digital signal  -  discrete = 0V or 5V
+	   by default all ports are configured as INPUT 
+		
+	   D00..D13 = digital port : discrete voltage levels, 0 or 1     
+		    00..13  =  in or out  :  digital signal  -  discrete = 0V (usually logic 0) or 5V (usually logic 1)
+			3, 5, 6, 9, 10, 11    :  might be used as PWM output
+		    D0 = RX				  :  ...					 
+	        D1 = TX				  :  ...
+	   by default all ports are configured as INPUT 
+
 
 	   GND = ground (2 pins)
 	   5V0 = power supply, 5.0V

@@ -9,19 +9,24 @@
 // how to process incoming serial data without blocking: http://www.gammon.com.au/serial
 // async serial peripheral interface: http://www.gammon.com.au/forum/?id=10894
 
-// morze intervals
-#define UNIT_TIME         (100)
+
+#define MORZE_PORT (13)    // connected to LED on MCU
+
+
+// morze intervals        (ms, 1 ms = 0.001 sec)
+#define UNIT_TIME         (300)
 #define DOT               (UNIT_TIME)
-#define DASH              (UNIT_TIME * 3)
+#define DASH              (UNIT_TIME * 3) 
 #define IN_LETTER_PAUSE   (UNIT_TIME)
-#define IN_WORD_PAUSE     (UNIT_TIME * 3)
-#define IN_SENT_PAUSE     (UNIT_TIME * 3)
+#define IN_WORD_PAUSE     (UNIT_TIME * 3 - UNIT_TIME)     // 3 is correct, but one UNIT_TIME already waited after symbol which was before
+#define IN_SENT_PAUSE     (UNIT_TIME * 7 - UNIT_TIME)     // 7 is correct, but one UNIT_TIME already waited after symbol which was before
 
 
 #define ALPHABET_SIZ (26)
 #define ASCII_OFFSET (97)   // 'a' code in ASCII table  ::  is used to get array index 
 #define LOWER_OFFSET (32)   // ('A' - 'a') delta in ASCII table  ::  is used to get lower case 
 #define SPACE_SYMBOL ' '
+
 
 const char* ALPHABET[ALPHABET_SIZ] =
 {
@@ -50,6 +55,33 @@ char get_alphabet_index(char letter)
 }
 
 
+/* Set digital level on the pin
+ * Arguments:
+ * 
+ * [in] pin (only allowed to output digital signal = 00..19)
+ * 
+ * [in] signal
+ *      - low  :  0 or 'false' or LOW
+ *      - high :  1 or 'true' or HIGH
+ *
+ * */
+void signalize(int port, char symbol)
+{
+  digitalWrite(port, HIGH);
+  
+  if (symbol == '.')
+  {
+    delay(DOT);
+  }
+  else
+  {
+    delay(DASH);
+  }
+
+  digitalWrite(port, LOW);
+}
+
+
 void setup() 
 {
   /* Open serial port, leads to MCU reset  
@@ -70,7 +102,8 @@ void setup()
    *          7E2  :  1 + 7 + 1 (even) + 2 = 11 bits 
    *
    * */
-  Serial.begin(9600, SERIAL_8N1);   
+  Serial.begin(9600, SERIAL_8N1);
+
 
   // wait for serial port to open
   // doesn't make sence for Arduino without native USB (only with Programming USB)
@@ -78,8 +111,29 @@ void setup()
   while(!Serial)
   {
   }
+  Serial.println("Serial port is opened");
+
+
+  /* Configure ports
+   * 
+   * [in] port number:
+   *      00..13            =  digital
+   *      14..19 or A0..A5  =  analogue
+   *
+   * [in] mode:
+   *      - INPUT
+   *      - INPUT_PULLUP    = ...
+   *      - OUTPUT
+   *
+   * */
+   pinMode(MORZE_PORT, OUTPUT);
+   Serial.println("GPIO port configured for OUTPUT");
+
+   Serial.println("Initialization is done");
 }
 
+
+// digitalWrite
 
 void loop() 
 {
@@ -90,12 +144,30 @@ void loop()
     
     if (letter != -1 && letter_index != -1)
     {
-      Serial.print(ALPHABET[letter_index]);
+      const char* letter_code = ALPHABET[(int)letter_index];
+      int len = strlen(letter_code);
+
+      for (int i = 0; i < len; ++i)
+      {        
+        char symbol = letter_code[i];
+        Serial.print(symbol);
+
+        signalize(MORZE_PORT, symbol);
+      
+        // wait between symbols in one letter
+        delay(IN_LETTER_PAUSE);
+      }
     }
     else
     {
       Serial.print(SPACE_SYMBOL);
+
+      // wait between words in one sentence or if unknown symbol is received
+      delay(IN_SENT_PAUSE);
     }
+
+    // wait between letters in one word
+    delay(IN_WORD_PAUSE);    
   }
 
 
