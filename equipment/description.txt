@@ -1,0 +1,50 @@
+
+
+ *--------------------------------------------------------------*
+ *                   CIRCUITS                                   *
+ *--------------------------------------------------------------*
+
+
+
+
+
+ *--------------------------------------------------------------*
+ *                   MOTORS                                     *
+ *--------------------------------------------------------------*
+
+
+
+
+
+ *--------------------------------------------------------------*
+ *                   SENSORS                                    *
+ *--------------------------------------------------------------*
+
+ : camera                                   pixel,      MP      
+   камера                                   resolution, pixels 
+                                            angle,      degrees  
+                                            focal,      mm
+                                            IR compat,  yes/no
+
+
+
+ *--------------------------------------------------------------*
+ *                   CONSUMABLES                                *
+ *--------------------------------------------------------------*
+
+ : wire                                     for solder board (e.g. Breadboard P/N B-30-1000 30AWG)
+   провода                                  for solderless boards = 'jumpers' (FF, MM, FM) 
+
+ : breadboard                               solder board = для паечного прототипирования
+   макетная плата                           solderless board = для беспаечного прототипирования
+
+ : sensor shield                            extension for convinient sensors connection (power connector port + power supply for every pin)
+   шилд
+
+ : pin plag                                 convinient work with board pins            
+   штыревая вилка
+
+ : LED		            	                Voltage, V
+   светодиод                                Current, A
+                                            Power,   W 
+

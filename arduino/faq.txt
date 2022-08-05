@@ -31,17 +31,3 @@
 
  ERROR  :  grpc: error while marshaling: proto: Marshal called with nil
  FIX    :  be shure that controller version has been chosen before compiling
-
-
- *--------------------------------------------------------------*
- *                         EQUIPMENT                            *
- *--------------------------------------------------------------*
-
- BOARD  :  circuit breadboard
- DESCR  :  solder / solderless boards
-
- CONNE  :  wire
- DESCR  :  wire for solder board (e.g. Breadboard P/N B-30-1000 30AWG) / 'jumpers' for solderless boards
-
- SHIEL  :  sensor shield
- DESCR  :  extension for convinient sensors connection (power connector port + power supply for every pin)
