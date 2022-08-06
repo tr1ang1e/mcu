@@ -20,6 +20,7 @@ Terms to study:
 	сайт: https://alexgyver.ru
 	видеокурс: https://www.youtube.com/playlist?list=PLgAbBhxTglwmVxDDC5TSYUI91oZ0LZQMw
 	статьи и книги: https://vk.com/rasduino
+  сайт: https://arduinoplus.ru/
 
 Документация Arduino
 
@@ -38,6 +39,6 @@ Terms to study:
 
 Драйвера
 
-    анатомия драйвера: https://habr.com/ru/post/282564/
+  анатомия драйвера: https://habr.com/ru/post/282564/
 	написание драйвера под линукс: https://habr.com/ru/post/206148/ 
 	книга по драйверам: "Linux Device Drivers" (см на русском языке на линуксе)

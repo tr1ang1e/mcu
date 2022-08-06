@@ -21,6 +21,17 @@
  QWEST  :  why does IDE always create folder for .ino sketch file (and folder must have the same name)
  ANS    :  it is inner IDE requirement, nothing special 
 
+ QWEST  :  can I use another IDE?
+ ANS    :  possible variants =
+             a) Arduino extension for VSCode
+		        - works only with Arduino IDE 1.x.x installed and use it's libraries
+				- doesn't have serial port input so use IDE itself to communicate with board
+			 b) PlatformIO extension for VSCode 
+			    - works as independent IDE
+				- debugging only for subsribers
+				- serial port input gets only 1 char per time (no inner buffer)
+
+
  *--------------------------------------------------------------*
  *                          ERRORS                              *
  *--------------------------------------------------------------*
