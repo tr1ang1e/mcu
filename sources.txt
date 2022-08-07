@@ -2,7 +2,7 @@
 Terms:
 
   - IC [abstract] = integrated circuit (the same as 'microchip') = https://en.wikipedia.org/wiki/Integrated_circuit
-  - MCU [speific] = microcontroller unit = https://en.wikipedia.org/wiki/Microcontroller 
+  - MCU [speсific] = microcontroller unit = https://en.wikipedia.org/wiki/Microcontroller 
 
 Terms to study:
 
@@ -42,3 +42,14 @@ Terms to study:
   анатомия драйвера: https://habr.com/ru/post/282564/
 	написание драйвера под линукс: https://habr.com/ru/post/206148/ 
 	книга по драйверам: "Linux Device Drivers" (см на русском языке на линуксе)
+
+Регистры
+
+  работа с регистрами: https://alexgyver.ru/lessons/registers/
+  регистры IO портов: https://habr.com/ru/post/253213/ 
+
+Программирование:
+
+  компиляция скетчей из терминала: https://habr.com/ru/post/247663/
+  визуальное программирование ардуино: поисковик = "нарисовать схему ардуино онлайн"
+  редактор электрических схемЖ 
