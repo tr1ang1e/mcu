@@ -21,6 +21,8 @@ Terms to study:
 	видеокурс: https://www.youtube.com/playlist?list=PLgAbBhxTglwmVxDDC5TSYUI91oZ0LZQMw
 	статьи и книги: https://vk.com/rasduino
   сайт: https://arduinoplus.ru/
+  статья: https://habr.com/ru/post/247663/ (программирование ардуино на чистом С)
+  сайт: http://mypractic.ru/category/uroki-programmirovaniya-arduino
 
 Документация Arduino
 
@@ -54,3 +56,4 @@ Terms to study:
   визуальное программирование ардуино: поисковик = "нарисовать схему ардуино онлайн"
   редактор электрических схем: https://www.circuit-diagram.org/editor/
   введение в ардуино ассемблер: https://www.arxterra.com/classes/intro-to-arduino-assembly/
+  i2c пример библиотеки: https://habr.com/ru/company/ruvds/blog/670392/

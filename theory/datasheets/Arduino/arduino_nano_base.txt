@@ -13,6 +13,11 @@
 
 	V = voltage stabilizer
 
+	REF (AREF) = analog reference
+		- use as reference for analog input value estimation
+		[!] range from 0 to VCC only
+		[!] use only with 'analogReference(EXTERNAL)' otherwise MCU might be corrupted (short circuit is possible)
+
 	Pins:
 
 	   D00..D13 = digital pins: discrete voltage levels, 0 or 1     
@@ -23,7 +28,7 @@
 	   by default all ports are configured as INPUT 
 	   
 	   A00..A07 = analogue pins:
-			00..07  =  in         :  continious voltage chart  -  range = 0V..5V  -  graduation interval ~ 0.005V 
+			00..07  =  in         :  continious voltage chart  -  graduation interval ~ 0.005V  -  range 0..N volt (depends on supply reference)
 			00..05  =  in or out  :  digital signal  -  discrete = 0V or 5V
 	   by default all ports are configured as INPUT 
 		
@@ -42,8 +47,6 @@
 
 
 
-
-
 								FRONT												BACK
 
 							   +-----+                                             +-----+
@@ -51,22 +54,36 @@
 				   |		   +-----+           |				       |		   +-----+           |
 				   |  [ D13 ]           [ D12 ]  |                     |                             |
 				   |  [ 3V3 ]           [ D11 ]  |                     |    +-----+                  |
-				   |  [     ]           [ D10 ]  |                     |    |     |                  |
-				   |  [     ]           [ D09 ]  |                     |    |  P  |                  |
-				   |  [ A00 ]  +-----+  [ D08 ]  |                     |    |     |                  |
-				   |  [ A01 ]  |  M  |  [ D07 ]  |                     |    +-----+                  |
-				   |  [ A02 ]  |  C  |  [ D06 ]  |                     |                             |
-				   |  [ A03 ]  +-----+  [ D05 ]  |                     |                             |
-				   |  [ A04 ]           [ D04 ]  |                     |                             |
-				   |  [ A05 ]           [ D03 ]  |                     |                             |
-				   |  [ A06 ]           [ D02 ]  |                     |                             |
-				   |  [ A07 ]           [     ]  |                     |                             |
-				   |  [ 5V0 ]           [     ]  |                     |                             |
-				   |  [     ]           [ GND ]  |                     |                             |
+				   |  [ REF ]           [ D10 ]  |                     |    |     |                  |
+				   |  [ A00 ]  +-----+  [ D09 ]  |                     |    |     |                  |
+				   |  [ A01 ]  |  M  |  [ D08 ]  |                     |    +-----+                  |
+				   |  [ A02 ]  |  C  |  [ D07 ]  |                     |                             |
+				   |  [ A03 ]  +-----+  [ D06 ]  |                     |                             |
+				   |  [ A04 ]           [ D05 ]  |                     |                             |
+				   |  [ A05 ]           [ D04 ]  |                     |                             |
+				   |  [ A06 ]           [ D03 ]  |                     |                             |
+				   |  [ A07 ]           [ D02 ]  |                     |                             |
+				   |  [ 5V0 ]           [ GND ]  |                     |                             |
+				   |  [ RST ]           [ RST ]  |                     |                             |
 				   |  [ GND ]           [ RX0 ]  |                     |                             |
-				   |  [ UIN ]           [ TX1 ]  |                     |           +-----+           |
+				   |  [ VIN ]           [ TX1 ]  |                     |           +-----+           |
 				   |                             |                     |           |  V  |           |
 				   |  [     ]  [     ]  [     ]  |                     |           +-----+           |
  				   |  [     ]  [     ]  [     ]  |                     |                             |
 				   |                             |                     |                             |
 				   +-----------------------------+                     +-----------------------------+
+
+
+
++------------------------------------------------+
++			SUPPLY								 +
++------------------------------------------------+
+
+While using USB to get supply, voltage on 5V0 pin might differ from time to time
+and always would have voltage less than 5.0 (around 4.7-4.9 in general). To get
+stable voltage, use:
+
+	> VIN and built-in stabilizer (see pin description) or
+	> DC (direct current) connector
+
+[!] Be aware of input voltage value
