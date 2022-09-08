@@ -57,3 +57,8 @@ Terms to study:
   редактор электрических схем: https://www.circuit-diagram.org/editor/
   введение в ардуино ассемблер: https://www.arxterra.com/classes/intro-to-arduino-assembly/
   i2c пример библиотеки: https://habr.com/ru/company/ruvds/blog/670392/
+
+Заказ печатных плат:
+
+  JLCPCB: https://jlcpcb.com
+  
