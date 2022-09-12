@@ -61,4 +61,9 @@ Terms to study:
 Заказ печатных плат:
 
   JLCPCB: https://jlcpcb.com
+
+Магазин электроники + WIKI раздел с хорошим описанием многих юнитов
+
+  dfrobot: https://www.dfrobot.com/
+  wiki: https://wiki.dfrobot.com/
   

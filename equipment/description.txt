@@ -26,6 +26,15 @@
                                             focal,      mm
                                             IR compat,  yes/no
 
+  : resistive sensors                       фоторезисторы
+    разистивные датчики                     терморезисторы
+                                            тензорезисторы
+                                            реостатные
+                                            ...
+
+  : fingerprint scanner                     capacitive (емкостный, e.g. ID809, R503)
+    сканер отпечатка пальца                 optical (оптический, e.g. AS608)     
+
 
 
  *--------------------------------------------------------------*
@@ -44,7 +53,7 @@
  : pin plag                                 convinient work with board pins            
    штыревая вилка
 
- : LED		            	                Voltage, V
+ : LED		            	                    Voltage, V
    светодиод                                Current, A
                                             Power,   W 
 
