@@ -25,9 +25,9 @@ void loop()
 /* special function
  *  
  *  > is called every time when delay() is called : see delay() implementation 
- *  > might be already defined in standard library, so:
+ *  > might be already defined in standard or any other library, so:
  *    - might be redefined in user's source code and this realizations is prior, but
- *    - be aware of built-in realization corrupting
+ *    - be aware of built-in or another library realization corrupting
  * 
  **/
 void yield()

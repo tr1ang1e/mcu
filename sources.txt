@@ -29,6 +29,10 @@ Terms to study:
 	официальный сайт (раздел обучения): https://docs.arduino.cc/learn/ 
 	русскоязычный: https://arduino.ru
 
+Уроки NodeMCU:
+
+  https://www.instructables.com/Getting-Started-With-ESP8266LiLon-NodeMCU-V3Flashi/
+
 Работа с COM-port в Linux 
 
 	статья: http://we.easyelectronics.ru/electro-and-pc/rabota-s-som-portom-na-si-v-linux.html
