@@ -22,11 +22,22 @@ https://habr.com/ru/post/133136/
     
 
 Полевой транзистор:
-https://www.youtube.com/watch?v=iRnMrHx8AiA
-https://habr.com/ru/post/133493/
+
+https://www.youtube.com/watch?v=iRnMrHx8AiA  -  общая информация
+https://habr.com/ru/post/133493/  -  общая информация
+https://habr.com/ru/post/446602/  -  расчет максимально допустимого тока
+http://easyelectronics.ru/upravlenie-moshhnoj-nagruzkoj-postoyannogo-toka-chast-3.html  -  правильные схемы подключения, ВАХ, драйверы
+https://kit-e.ru/circuit/sovety-po-upravleniyu-zatvorom/ - варианты управления затвором
+https://habr.com/ru/company/unwds/blog/390601/  -  правильная коммутация мощных нагрузок
+https://www.youtube.com/watch?v=dX9KMFFXTX4  -  расчет транзисторного ключа
+
+открытие и закрытие транзистора
+https://elektrolife.ru/mosfet-modul-140c07-rabota-mosfet-tranzistora-v-kachestve-perekljuchatelja/
+http://electrik.info/main/praktika/1661-upravlenie-zatvorom-mosfet-i-igbt.html
+
 
     > область применения: цифровая техника
-    > элементы: затвор, сток, исток + подложка 
+    > элементы: затвор (gate), сток (drain), исток (source) + подложка 
     > схемы переходов: n-p (n = сток, исток), p-n (p = сток, исток)
     > заряд переносят: или электроны, или дырки
     > варианты включения: 
@@ -36,11 +47,35 @@ https://habr.com/ru/post/133493/
     
     имеет свойства конденсатора:
         чтобы "включить", достаточно приложить напряжение
+            - напряжение считается относительно напряжения истока
+            - положительное для N-channel, отрицательное для P-channel
         чтобы "выключить", достаточно разрядить диод (замкнуть на землю)
-
+        
     транзистор может работать как паразитный диод, если
     поменять полярность включения (см. объяснения видео)
 
     виды:
         JFET = с управляющим переходом = изначально открыт (подать напряжение = закрыть)
         MOSFET = с изолированным затвором = изначально закрыт (подать напряжение = открыть)
+
+    характеристики и расчет свойств:
+
+        Vgs(th)                 Gate-to-Source threshold voltage        пороговое напряжение (диапазон для экземпляра транзистора)
+        Vgs                     Gate-to-Source voltage                  максимальное напряжение на завторе относительно истока, после которого не происходит увеличения пропускной способности
+
+        Vdss или V(br)dss       Drain-to-Sourse breakdown voltage       напряжение, при котором происходит пробой сток-исток
+        Id                      Continuous drain current                максимально допустимый ток через транзистор
+        Rds(on)                 Static Drain-to-Source On-Resistance    сопротивление открытого транзистора
+        
+        Idss                    Drain-to-Source leakage current         ток утечки транзистора при полностью закрытом затворе
+        Igss                    Gate-to-Source leakage current          ток утечки на открытом затворе при указанном напряжении на затворе
+
+        Crss                    Revers transfer capacitance             емкость затвор-сток (Cgd, емкость Миллера)
+        Сiss                    Input capacitance                       входная емкость (Cgs + Cgd)
+        Coss                    Output capacitance                      выходная емкость (Cgs + Csd)
+
+        td(on)                  turn-on delay time                      время открытия транзистора
+        tr                      rise time                               время нарастания импульса открытия (передний фронт)
+        td(off)                 turn-off delay time                     время закрытия транзистора
+        tf                      fall time                               время спада импульса (задний фронт)
+

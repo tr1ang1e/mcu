@@ -41,7 +41,7 @@
 	Ports:
 
 	   Port B (PB7:0) = 2 output for qwartz resonator (PB7:6) + 6 pins, D13..D08 (PB5:0)
-	   Port C = 7 pins = RESET + A06..A00
+	   Port C = 7 pins = RESET + A05..A00
 	   Port D = 8 pins = D07..D00
 
 

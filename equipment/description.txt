@@ -4,6 +4,8 @@
  *                   CIRCUITS                                   *
  *--------------------------------------------------------------*
 
+ : DAC (digital-to-analog converter)        PWM (e.g. built into Atmega)      
+   цифрово-аналоговый преобразователь       R-2R ladder (e.g. MCP4725, https://www.arduino.cc/reference/en/libraries/mcp4725/)      
 
 
 
@@ -56,4 +58,4 @@
  : LED		            	                    Voltage, V
    светодиод                                Current, A
                                             Power,   W 
-
+                      
