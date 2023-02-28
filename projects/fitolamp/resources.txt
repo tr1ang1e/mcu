@@ -1,0 +1,21 @@
+ESP8266 manuals:	
+
+    https://github.com/esp8266/                                     esp8266 community 
+    https://www.freertos.org							            FreeRTOS official
+    https://www.youtube.com/watch?v=sdA4Yx9-EpQ				        C Programming in Eclipse using ESP SDK (No VM, No Arduino)
+    https://www.youtube.com/watch?v=pWo-ErpVZC4				        Making your own C programs for the ESP8266
+    https://habr.com/ru/post/406813/						        Немного о программировании ESP8266 на C под FreeRTOS
+    https://www.teachmemicro.com/getting-started-wemos-d1-mini/		Getting Started with WeMos D1 Mini (Arduino IDE)
+    https://github.com/esp8266/Arduino						        Arduino core for ESP8266 WiFi chip
+    https://github.com/AlexGyver/GyverLamp2					        GyverLamp2 as a reference   
+    https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html      esp8266 beginners guide
+    https://www.wemos.cc/en/latest/d1/d1_mini.html                  Wemos D1 mini official info and tutorials
+
+PlatformIO
+
+    https://randomnerdtutorials.com/vs-code-platformio-ide-esp32-esp8266-arduino/
+    https://www.electronicshub.org/programming-esp8266-using-vs-code-and-platformio/
+
+Arduino IDE
+
+    https://www.youtube.com/watch?v=UOsv7dwXuaA (VSCode extension)

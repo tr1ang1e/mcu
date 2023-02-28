@@ -1,0 +1,25 @@
+Author's project web-page
+https://alexgyver.ru/gyverlamp/
+
+1. 16x16 LED panel
+   WS2812B  
+   https://aliexpress.ru/item/1005003867884387.html
+
+2. ESP controller
+   ESP8266 with built-in WiFi module and built-in programmer CH340 
+   https://aliexpress.ru/item/32651747570.html
+
+3. Power supply adapter
+   5V 3A
+   https://aliexpress.ru/item/32866488177.html
+
+4. Potentiometr
+   R = ...
+   https://aliexpress.ru/item/1005003784216326.html
+
+5. Fingerprint scanner
+   Capasitive, ID809
+   https://aliexpress.ru/item/1005003599001104.html
+   https://wiki.dfrobot.com/Capacitive_Fingerprint_Sensor_SKU_SEN0348
+   https://github.com/DFRobot/DFRobot_ID809
+   
