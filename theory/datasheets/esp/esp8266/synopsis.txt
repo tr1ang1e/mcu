@@ -1,0 +1,104 @@
+
+ESP8266 явяляется проприетарным чипом и имеет проприетарный SDK, поставляемый "espressif"
+Документация содержит:
+    SDK = описание API
+    technical reference = GPIO / SPI / UART / Timer registers 
+
+
+
+/* --------------------------------------------------------- */
+/*                      H A R D W A R E                      */
+/* --------------------------------------------------------- */
+
+Основные характеритсики:
+    питание = от 3V3 до 5V
+    ток пин = output pin до 0.12 mA / input pin до ... mA
+    ADC (analog to digital converter) = от 0V до 1V
+
+Если чип без платы (bare-bones board), к нему потребуется:
+    - voltage regulator (i.e. LM1117-3.3 / WEMOS D1 mini uses ME6211)
+    - programmator = USB-to-Serial converter (i.e. FTDI FT232RL)
+
+GPIO
+    общее количество 0-16
+    пины 6-11 недоступны, т.к. используются Flash памятью
+    см. наименованием пинов на плате: в header'ах используются макросы для маппинга
+    pulling up/down:
+        0-14   might be pulled up / 16 might be pull down
+        0      is pulled up during normal operations
+        15     is always pulled down
+        
+BOOT MODES
+    GPIO-0    GPIO-2   GPIO-15
+         0         1         0       // Uart bootloader
+         1         1         0       // DEFAULT = Boot sketch (SPI flash)
+         -         -         1       // SDIO mode
+    Главное, что необходимо учитывать относительно пинов = 
+при подключении периферии может быть непреднамеренно
+изменен логический уровень на одном из описанных пинов,
+что приведет к изменению режима загрузки контроллера
+    Note: GPIO-4, GPIO-5 - единственные пины, которые остаются LOW на
+протяжении загрузки чипа в bootloader и sketch режимах. Остальные
+пины нестабильны по напряжению / LOW с задержкой / всегда HIGH  
+(https://rabbithole.wwwdotorg.org/2017/03/28/esp8266-gpio.html)
+
+UARTs
+    UART0: GPIO-1 (TX), GPIO-3 (RX)  // пины GPIO-15 (RTS), GPIO-13 (CTS) доступны для реализации Hardware Flow Control
+    UART1: GPIO-2 (TX), GPIO-8 (RX)  // GPIO-8 пин недоступен, так как используется для Flash memory (см. выше)
+
+PWM
+    - is software emulated by using NMI (Non Maskable Interrupt) on FRC1 (hardware timer)
+    - 8 channels = 16 digital pins (GPIO-0..GPIO-15)
+    - frequency is provided by 80MHz source
+    - ...
+
+Analog INPUT
+    - range 0..1V when estimating external signal
+    - might be configured to read the supply voltage instead of external signal
+
+TIMERS
+    - hardware timers = ZERO is reserved for WiFi etc. procedures, FRC1 is available for user's code  = generate NMI         // SDK: hw_timer.h
+    - software timers = ...                                                                           = generate TASKS       // SDK: osapi.h
+    - watchdog timer  = soft WDT (reset after ~3sec without WiFi is allowed to proceed), hard WDT (reset after ~8sec ...)
+
+WiFi 
+    - only one core is in chip
+    - user must manually give time by calling yield() or delay(...) after no more than 100ms
+
+[[ ??? ]] -------------------------------------------------- 
+
+? - interrupts, I2C are software-emulated (not hardware-based) 
+? - "GPIO-0 is pulled up during normal operations" (what is "normal")
+? - how to configure PWM
+
+
+
+/* --------------------------------------------------------- */
+/*                   D E V E L O P M E N T                   */
+/* --------------------------------------------------------- */
+
+Using ArduinoIDE:
+    install ArduinoIDE
+    File - Preferences - field "Additional Board Manager URLs"
+    paste http://arduino.esp8266.com/stable/package_esp8266com_index.json
+    Tools - Board - Board Manager - search for required ESP
+
+Using VSCode + ArduinoIDE extension
+    install VSCode
+    ...
+
+Using VSCode + PlatformIO extension
+    install VSCode
+    ...
+
+[[ *** ]] --------------------------------------------------
+
+* - For inboard CH340 USB-to-Serial drivres are required: https://github.com/nodemcu/nodemcu-devkit/tree/master/Drivers
+* - For Over-the-air updates Python is required
+* - Code samples: ArduinoIDE - File - Examples
+
+
+
+
+
+
