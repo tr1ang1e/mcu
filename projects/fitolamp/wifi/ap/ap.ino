@@ -11,10 +11,18 @@
 #include <ESP8266WiFi.h>
 
 
+/* --------------------------------------------------------- */
+/*                   S T A T I C   D A T A                   */
+/* --------------------------------------------------------- */
+
 // access point preferences
 const char* ssid = "esp8266";         // service set identifier
 const char* password = "password";    // use empty string "" to provide an open network
 
+
+/* --------------------------------------------------------- */
+/*                        M A I N                            */
+/* --------------------------------------------------------- */
 
 void setup() 
 {

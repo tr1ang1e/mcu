@@ -96,9 +96,3 @@ Using VSCode + PlatformIO extension
 * - For inboard CH340 USB-to-Serial drivres are required: https://github.com/nodemcu/nodemcu-devkit/tree/master/Drivers
 * - For Over-the-air updates Python is required
 * - Code samples: ArduinoIDE - File - Examples
-
-
-
-
-
-

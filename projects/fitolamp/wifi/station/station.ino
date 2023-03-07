@@ -1,13 +1,14 @@
 /*
     Use ESP8266 in a station mode
     For testing:
-        $ ping <esp-IP>     // will be printed to the seral monitor 
+        $ ping <esp-IP>     // will be printed to the serial monitor 
 */
 
 
 #include <Arduino.h>
 #include <Esp.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
 
 
 /* --------------------------------------------------------- */
@@ -21,9 +22,11 @@
 /*                   S T A T I C   D A T A                   */
 /* --------------------------------------------------------- */
 
-// access point preferences
-const char* ssid = "Keenetic-4349";         // service set identifier
-const char* password = "UDWMpKf6";          // access point password
+// access points preferences >> the strongest one will be chosen
+// ESP8266WiFiMulti::addAP(ssid, password):
+//    ssid = service set identifier
+//    password = access point password
+ESP8266WiFiMulti wifiMulti;
 
 // station network settings
 IPAddress ip(192, 168, 1, 101);             // local IP address
@@ -35,7 +38,13 @@ IPAddress mask(255, 255, 255, 0);           // subnet mask
 /*             S T A T I C   F U N C T I O N S               */
 /* --------------------------------------------------------- */
 
+// setup functions
+static void set_access_points_preferences();
+static void set_serial_communication(int baudrate);
+
+// utilities
 static void blink(bool startLevel, int delayMs);
+static bool connect_access_point(int attempts, int attemptDelay);         // @attempts: negative for endless tries
 
 
 /* --------------------------------------------------------- */
@@ -44,34 +53,32 @@ static void blink(bool startLevel, int delayMs);
 
 void setup() 
 {
-    // set serial port communication
-    Serial.begin(9600);
-    while(!Serial)
-    {
-    }
-    Serial.println("Serial port is opened");
+    bool result;
+    set_serial_communication(9600);
 
     // configure pin so that LED will indicates work
     pinMode(LED_BUILTIN, OUTPUT);
     digitalWrite(LED_BUILTIN, LOW);
 
     // set esp network settings
-    bool result = WiFi.config(ip, gateway, mask);
+    result = WiFi.config(ip, gateway, mask);
     if (!result)
     {
-        __PINFO("Failed to set custom ESP station network properties. ", "Drefaults are used")
+        __PINFO("Failed to set custom ESP station network properties. ", "Defaults are used")
     }
 
-    // conect to existent access point
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED)
+    // connect to existent access point
+    set_access_points_preferences();
+    result = connect_access_point(-1 , 200);
+    if (!result)
     {
-        blink(HIGH, 100);
+        __PINFO("Failed to connect to access points. ", "")
     }
-    __PINFO("Connected to: ", ssid);
 
+    __PINFO("Connected to = ", WiFi.SSID());
     __PINFO("ESP info", " = ")
-    __PINFO("  local IP: ", WiFi.localIP());
+    __PINFO("  MAC address : ", WiFi.macAddress());
+    __PINFO("  local IP    : ", WiFi.localIP());
 }
 
 void loop() 
@@ -84,10 +91,45 @@ void loop()
 /*             S T A T I C   F U N C T I O N S               */
 /* --------------------------------------------------------- */
 
-static void blink(bool startLevel, int delayMs)
+void set_access_points_preferences()
+{
+    wifiMulti.addAP("Keenetic-4349", "UDWMpKf6" );
+    wifiMulti.addAP("MDC_5GHz", "ypswa5WCJ");
+}
+
+void set_serial_communication(int baudrate)
+{
+    Serial.begin(baudrate);
+    while(!Serial)
+    {
+    }
+    Serial.println("Serial port is opened");
+}
+
+void blink(bool startLevel, int delayMs)
 {
     digitalWrite(LED_BUILTIN, startLevel);
     delay(delayMs);
     digitalWrite(LED_BUILTIN, !startLevel);
     delay(delayMs);
+}
+
+bool connect_access_point(int attempts, int attemptDelay)
+{
+    bool result = false;
+    wl_status_t status;
+    
+    bool endless = (attempts < 0);
+    while (endless || attempts--)
+    {
+        status = wifiMulti.run();
+        if (status == WL_CONNECTED)
+        {
+          result = true;
+          break;
+        }
+        blink(HIGH, attemptDelay / 2);
+    }
+
+    return result;
 }

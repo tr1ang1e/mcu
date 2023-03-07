@@ -19,3 +19,8 @@ PlatformIO
 Arduino IDE
 
     https://www.youtube.com/watch?v=UOsv7dwXuaA (VSCode extension)
+
+Entire projects
+
+    https://randomnerdtutorials.com/projects/                       200+ Electronics Projects and Tutorials
+    https://randomnerdtutorials.com/smart-home-ebook/               SMART HOME with Raspberry Pi, ESP32, and ESP8266
