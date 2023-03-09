@@ -3,9 +3,16 @@
     For testing:
         $ ping <esp-IP>     // will be printed to the serial monitor 
     
-    If error occurs, potential problem is
-    that mDNS is disabled or doesn't set 
-    on a host system. To fix check for:
+    Multicast DNS (along with DNS-SD) was developed within the 
+    context of "zeroconf" = Zero Configuration Networking:
+        - is a part of TCP/IP
+        - LAN = local area network
+        - only host names with the ending .local are possible
+        - requires additional CPU resources
+        - hazard issue  
+
+    If error occurs when 'ping', potential problem is that mDNS 
+    is disabled or doesn't set on a host system. To fix check for:
         Linux = 'Avahi' tools
         Windows = 'Bonjour' tools
 */
@@ -22,7 +29,6 @@
 /*                   H E L P   M A C R O S                   */
 /* --------------------------------------------------------- */
 
-// ADC_MODE(ADC_VCC)   // ESP.getVcc();
 #define __PINFO(_1, _2)  Serial.print(_1); Serial.println(_2);
 
 
