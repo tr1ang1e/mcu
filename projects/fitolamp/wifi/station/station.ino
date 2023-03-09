@@ -1,7 +1,13 @@
 /*
-    Use ESP8266 in a station mode
+    Use ESP8266 in a station mode  >>  access using mDNS
     For testing:
         $ ping <esp-IP>     // will be printed to the serial monitor 
+    
+    If error occurs, potential problem is
+    that mDNS is disabled or doesn't set 
+    on a host system. To fix check for:
+        Linux = 'Avahi' tools
+        Windows = 'Bonjour' tools
 */
 
 
@@ -9,12 +15,14 @@
 #include <Esp.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
+#include <ESP8266mDNS.h>
 
 
 /* --------------------------------------------------------- */
 /*                   H E L P   M A C R O S                   */
 /* --------------------------------------------------------- */
 
+// ADC_MODE(ADC_VCC)   // ESP.getVcc();
 #define __PINFO(_1, _2)  Serial.print(_1); Serial.println(_2);
 
 
@@ -33,6 +41,9 @@ IPAddress ip(192, 168, 1, 101);             // local IP address
 IPAddress gateway(192, 168, 1, 1);          // see local network gateway
 IPAddress mask(255, 255, 255, 0);           // subnet mask
 
+// MDNS settings
+const char* responder = "esp8266";
+
 
 /* --------------------------------------------------------- */
 /*             S T A T I C   F U N C T I O N S               */
@@ -41,6 +52,7 @@ IPAddress mask(255, 255, 255, 0);           // subnet mask
 // setup functions
 static void set_access_points_preferences();
 static void set_serial_communication(int baudrate);
+static bool set_mdns_responder(const char* responder);
 
 // utilities
 static void blink(bool startLevel, int delayMs);
@@ -64,7 +76,8 @@ void setup()
     result = WiFi.config(ip, gateway, mask);
     if (!result)
     {
-        __PINFO("Failed to set custom ESP station network properties. ", "Defaults are used")
+        __PINFO("Failed to set custom ESP station network properties. ", "Defaults are used");
+        goto end;
     }
 
     // connect to existent access point
@@ -72,18 +85,33 @@ void setup()
     result = connect_access_point(-1 , 200);
     if (!result)
     {
-        __PINFO("Failed to connect to access points. ", "")
+        __PINFO("Failed to connect to access points. ", "");
+        goto end;
     }
 
+    // MDNS settings
+    result = set_mdns_responder(responder);
+    if (!result)
+    {
+        __PINFO("Failed to set MDNS responder: ", responder);      
+        goto end;
+    }
+
+    // Information
     __PINFO("Connected to = ", WiFi.SSID());
-    __PINFO("ESP info", " = ")
-    __PINFO("  MAC address : ", WiFi.macAddress());
-    __PINFO("  local IP    : ", WiFi.localIP());
+    __PINFO("ESP info", " = ");
+    __PINFO("  MAC address   : ", WiFi.macAddress());
+    __PINFO("  local IP      : ", WiFi.localIP());
+    __PINFO("  mDNS (.local) : ", responder);
+
+end:
+    ;   // required by label
 }
 
 void loop() 
 {
-    // nothing to do
+    // must be called in every 'loop' to run the mDNS processing
+    MDNS.update();  
 }
 
 
@@ -104,6 +132,14 @@ void set_serial_communication(int baudrate)
     {
     }
     Serial.println("Serial port is opened");
+}
+
+bool set_mdns_responder(const char* responder)
+{
+    // return MDNS.begin(responder, WiFi.localIP());
+    bool result = MDNS.begin(String(responder));
+    Serial.println(result);
+    return result;
 }
 
 void blink(bool startLevel, int delayMs)
