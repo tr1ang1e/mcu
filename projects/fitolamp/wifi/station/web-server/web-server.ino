@@ -3,23 +3,17 @@
     For testing:
         $ ping <esp-IP>     // will be printed to the serial monitor 
     
-    Multicast DNS (along with DNS-SD) was developed within the 
-    context of "zeroconf" = Zero Configuration Networking:
-        - is a part of TCP/IP
-        - LAN = local area network
-        - only host names with the ending .local are possible
-        - requires additional CPU resources
-        - hazard issue  
-
-    If error occurs when 'ping', potential problem is that mDNS 
-    is disabled or doesn't set on a host system. To fix check for:
+    If error occurs, potential problem is
+    that mDNS is disabled or doesn't set 
+    on a host system. To fix check for:
         Linux = 'Avahi' tools
         Windows = 'Bonjour' tools
-    But before checking mentioned tools, try to
-    reconnect host system to WiFi access point
+
+
+    URI = Uniform Resource Identifier
 */
 
-#define SKETCH "station, mDNS"
+#define SKETCH "station, web-server"
 
 
 /* --------------------------------------------------------- */
@@ -31,6 +25,8 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266mDNS.h>
+
+#include "http.h"
 
 
 /* --------------------------------------------------------- */
@@ -44,7 +40,6 @@
 /*                   S T A T I C   D A T A                   */
 /* --------------------------------------------------------- */
 
-
 // access points preferences >> the strongest one will be chosen
 // ESP8266WiFiMulti::addAP(ssid, password):
 //    ssid = service set identifier
@@ -56,8 +51,14 @@ IPAddress ip(192, 168, 1, 101);             // local IP address
 IPAddress gateway(192, 168, 1, 1);          // see local network gateway
 IPAddress mask(255, 255, 255, 0);           // subnet mask
 
+// MCU state
+bool isLampOn = true;
+
 // MDNS settings
 const char* responder = "esp8266";
+
+// HTTP server
+ESP8266WebServer webServer(80);
 
 
 /* --------------------------------------------------------- */
@@ -68,6 +69,7 @@ const char* responder = "esp8266";
 static void set_access_points_preferences();
 static void set_serial_communication(int baudrate);
 static bool set_mdns_responder(const char* responder);
+static void set_web_server_callbacks();
 
 // utilities
 static void blink(bool startLevel, int delayMs);
@@ -97,10 +99,11 @@ void setup()
 
     // connect to existent access point
     set_access_points_preferences();
-    result = connect_access_point(-1 , 200);
+    result = connect_access_point(-1 , 200);    // led is on after processing
     if (!result)
     {
         __PINFO("Failed to connect to access points. ", "");
+        digitalWrite(LED_BUILTIN, HIGH);
         goto end;
     }
 
@@ -111,6 +114,10 @@ void setup()
         __PINFO("Failed to set MDNS responder: ", responder);      
         goto end;
     }
+
+    // HTTP server
+    set_web_server_callbacks();
+    webServer.begin();
 
     // Information
     __PINFO("Sketch = ", SKETCH)
@@ -128,6 +135,9 @@ void loop()
 {
     // must be called in every 'loop' to run the mDNS processing
     MDNS.update();  
+
+    // HTTP requests from clients listener
+    webServer.handleClient(); 
 }
 
 
@@ -154,6 +164,17 @@ bool set_mdns_responder(const char* responder)
 {
     bool result = MDNS.begin(String(responder));
     return result;
+}
+
+void set_web_server_callbacks()
+{
+    // the only callback for URIs weren't defined
+    webServer.onNotFound(uri_not_found);    
+    
+    // callbacks for existent URIs
+    webServer.on(URI_ROOT, uri_root);
+    webServer.on(URI_LAMP, uri_lamp);
+    // ...
 }
 
 void blink(bool startLevel, int delayMs)
