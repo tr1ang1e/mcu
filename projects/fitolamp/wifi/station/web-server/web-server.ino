@@ -1,19 +1,12 @@
 /*
-    Use ESP8266 in a station mode  >>  access using mDNS
-    For testing:
-        $ ping <esp-IP>     // will be printed to the serial monitor 
-    
-    If error occurs, potential problem is
-    that mDNS is disabled or doesn't set 
-    on a host system. To fix check for:
-        Linux = 'Avahi' tools
-        Windows = 'Bonjour' tools
-
-
-    URI = Uniform Resource Identifier
+    Use ESP8266 in a station mode  >>  use as a WEB-server
+    Available URI's:
+        <esp>/                          = root URI
+        <esp>/stat                      = current chip statistics
+        <esp>/lamp?state=<state>        = <state> values: on, off 
 */
 
-#define SKETCH "station, web-server"
+#define SKETCH "station, web-server: fitolamp"
 
 
 /* --------------------------------------------------------- */
@@ -33,6 +26,7 @@
 /*                   H E L P   M A C R O S                   */
 /* --------------------------------------------------------- */
 
+// ADC_MODE(ADC_VCC)   // ESP.getVcc();
 #define __PINFO(_1, _2)  Serial.print(_1); Serial.println(_2);
 
 
@@ -51,8 +45,8 @@ IPAddress ip(192, 168, 1, 101);             // local IP address
 IPAddress gateway(192, 168, 1, 1);          // see local network gateway
 IPAddress mask(255, 255, 255, 0);           // subnet mask
 
-// MCU state
-bool isLampOn = true;
+// fitolamp state state
+bool isFitolampOn = false;
 
 // MDNS settings
 const char* responder = "esp8266";
@@ -85,9 +79,11 @@ void setup()
     bool result;
     set_serial_communication(9600);
 
-    // configure pin so that LED will indicates work
-    pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, LOW);
+    // configure pin:
+    //    LED_BUILTIN indicates work
+    //    PIN_FITOLAMP might be accessed throug web-interface
+    pinMode(LED_BUILTIN, OUTPUT);     digitalWrite(LED_BUILTIN, LOW);
+    pinMode(PIN_FITOLAMP, OUTPUT);    digitalWrite(PIN_FITOLAMP, LOW);
 
     // set esp network settings
     result = WiFi.config(ip, gateway, mask);
@@ -126,6 +122,8 @@ void setup()
     __PINFO("  MAC address   : ", WiFi.macAddress());
     __PINFO("  local IP      : ", WiFi.localIP());
     __PINFO("  mDNS (.local) : ", responder);
+    __PINFO("Remote hardware", " = ");
+    __PINFO("  fitolamp pin  : ", PIN_FITOLAMP);
 
 end:
     ;   // required by label
@@ -173,6 +171,7 @@ void set_web_server_callbacks()
     
     // callbacks for existent URIs
     webServer.on(URI_ROOT, uri_root);
+    webServer.on(URI_STAT, uri_stat);
     webServer.on(URI_LAMP, uri_lamp);
     // ...
 }

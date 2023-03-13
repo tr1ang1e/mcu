@@ -1,4 +1,3 @@
-#include "pins_arduino.h"
 #ifndef HTTP_H
 #define HTTP_H
 
@@ -15,20 +14,22 @@
 /* --------------------------------------------------------- */
 
 #include <ESP8266WebServer.h>
+#include "pins_arduino.h"
 
 
 /* --------------------------------------------------------- */
 /*                   H E L P   M A C R O S                   */
 /* --------------------------------------------------------- */
 
-#define WEB_TEXT  "text/plain"
+#define WEB_TEXT      "text/plain"
+#define PIN_FITOLAMP  D1 
 
 // all URIs
 #define URI_ROOT              "/"
+#define URI_STAT              "/stat"
 #define URI_LAMP              "/lamp"
 
 // URI_LAMP args
-#define URI_LAMP_INFO         "info"
 #define URI_LAMP_STATE        "state"
 
 
@@ -37,7 +38,7 @@
 /* --------------------------------------------------------- */
 
 extern ESP8266WebServer webServer;
-extern bool isLampOn;
+extern bool isFitolampOn;
 
 /* --------------------------------------------------------- */
 /*                         T Y P E S                         */
@@ -67,55 +68,65 @@ void uri_root()  // URI_ROOT
     webServer.send(WEB_SUCCESS, WEB_TEXT, "root");
 }
 
+void uri_stat()  // URI_STAT
+{
+    char stat[1024] = { 0 };
+    size_t offset = 0;
+
+    // TODO:
+    // from serial port information
+
+    const char* fitolamp_header = "Fitolamp: ";
+    memcpy(stat + offset, fitolamp_header, strlen(fitolamp_header));
+    offset += strlen(fitolamp_header);
+
+    const char* fitolamp_state = isFitolampOn ? "on\n" : "off\n";
+    memcpy(stat + offset, fitolamp_state, strlen(fitolamp_state));
+    offset += strlen(fitolamp_state);
+
+    webServer.send(WEB_SUCCESS, WEB_TEXT, stat);
+}
+
 void uri_lamp()  // URI_LAMP
 {
-    bool hasInfo = webServer.hasArg(URI_LAMP_INFO);
     bool hasState = webServer.hasArg(URI_LAMP_STATE);
     
     /* passed arguments validation */
     
-    if (!hasInfo && !hasState)
+    if (!hasState)
     {
-        webServer.send(WEB_BAD_REQUEST, WEB_TEXT, "400: use 'state=<state>' or 'info' arguments");
-        return;
-    }
-    else if (hasState && hasInfo) 
-    {
-        webServer.send(WEB_BAD_REQUEST, WEB_TEXT, "400: passed arguments cannot be used simultaneously");
+        webServer.send(WEB_BAD_REQUEST, WEB_TEXT, "400: use 'state=<state>' to manage fitolamp");
         return;
     }
     
     /* arguments handling */
 
-    if (hasInfo)
-    {
-        const char* info = isLampOn ? "lamp state: ON" : "lamp state: OFF";
-        webServer.send(WEB_SUCCESS, WEB_TEXT, info);
-        return;
-    }
-
     if (hasState)
     {
         if (webServer.arg(URI_LAMP_STATE) == "on")
         {
-            if (!isLampOn)
+            if (!isFitolampOn)
             {
-                digitalWrite(LED_BUILTIN, LOW);
-                isLampOn = true;
+                digitalWrite(PIN_FITOLAMP, HIGH);
+                isFitolampOn = true;  
             }          
         }
         else if (webServer.arg(URI_LAMP_STATE) == "off")
         {
-            if (isLampOn)
+            if (isFitolampOn)
             {
-                digitalWrite(LED_BUILTIN, HIGH);
-                isLampOn = false;
+                digitalWrite(PIN_FITOLAMP, LOW);
+                isFitolampOn = false;
             }         
+        }
+        else 
+        {
+            webServer.send(WEB_SUCCESS, WEB_TEXT, "400: use either 'on' or 'off' value");
+            return;
         }
 
         webServer.send(WEB_SUCCESS, WEB_TEXT, "200: success");
     }
-    
 }
 
 
