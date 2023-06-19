@@ -1,0 +1,1 @@
+Pinout = https://pinout.xyz
